@@ -1071,17 +1071,18 @@ export default function LandingPage() {
       </section>
 
       {/* ─── SECCIÓN 4: CALCULADORA / PERSONALIZADOR ─── */}
-      <section id="personalizar" className="py-14 sm:py-20 lg:py-24 max-w-7xl mx-auto px-5 sm:px-8">
+      <section id="personalizar" className="py-14 sm:py-20 lg:py-24 w-full px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
         <div
           className={cn(
-            "rounded-3xl border p-8 sm:p-12 shadow-2xl relative overflow-hidden transition-colors",
+            "rounded-3xl border p-6 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden transition-colors",
             theme === "dark"
               ? "bg-gradient-to-br from-[#160918] via-[#120614] to-[#1c0b1e] border-[#3b1738]"
               : "bg-gradient-to-br from-[#ffffff] via-[#faf4f8] to-[#fceef5] border-[#ebdce7]"
           )}
         >
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-6 space-y-5">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+            <div className="space-y-5">
               <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#d9487d]">
                 Calculadora Interactiva
               </span>
@@ -1191,7 +1192,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-6 space-y-3">
+            <div className="space-y-3">
               <label className="text-xs font-bold uppercase tracking-wider text-[#d9487d] block mb-2">
                 Agrega Complementos a tu Sesión:
               </label>
@@ -1265,6 +1266,7 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* ─── SECCIÓN 5: MOTOR DE RESERVA ─── */}
@@ -1275,8 +1277,9 @@ export default function LandingPage() {
           theme === "dark" ? "bg-[#0e0610] border-[#261226]" : "bg-[#f5eef4] border-[#ebdce7]"
         )}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-16 space-y-3">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-2xl mx-auto mb-8 md:mb-14 space-y-3">
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#d9487d]">
               Confirmación Inmediata
             </span>
@@ -1354,10 +1357,10 @@ export default function LandingPage() {
               </button>
             </div>
           ) : (
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
               <div
                 className={cn(
-                  "lg:col-span-7 space-y-6 p-6 sm:p-8 rounded-3xl border",
+                  "space-y-6 p-5 sm:p-7 rounded-3xl border",
                   theme === "dark"
                     ? "bg-[#140816] border-[#2b1328]"
                     : "bg-white border-[#ebdce7] shadow-sm"
@@ -1593,7 +1596,7 @@ export default function LandingPage() {
 
               <div
                 className={cn(
-                  "lg:col-span-5 p-6 sm:p-8 rounded-3xl border",
+                  "p-5 sm:p-7 rounded-3xl border",
                   theme === "dark"
                     ? "bg-[#140816] border-[#2b1328]"
                     : "bg-white border-[#ebdce7] shadow-sm"
@@ -1719,6 +1722,7 @@ export default function LandingPage() {
               </div>
             </div>
           )}
+          </div>
         </div>
       </section>
 

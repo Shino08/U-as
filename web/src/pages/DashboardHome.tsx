@@ -254,69 +254,73 @@ export default function DashboardHome() {
           <div
             className={`divide-y ${isDark ? "divide-[#200b22]" : "divide-[#f2e6ee]"}`}
           >
-            {recent.map((a: any) => (
-              <div
-                key={a.id}
-                className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 transition-colors ${
-                  isDark ? "hover:bg-[#18091b]/50" : "hover:bg-[#fbf5f8]"
-                }`}
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-tr from-[#2a0e28] to-[#3b1538] text-xs font-bold text-[#f49bbd] border border-[#d9487d]/20 shrink-0">
-                    {(a.clientName || a.customerName || a.user?.name || "C")
-                      .charAt(0)
-                      .toUpperCase()}
+            {recent.map((a: any) => {
+              const serviceName =
+                a.Service?.name || a.service?.name || null;
+              return (
+                <div
+                  key={a.id}
+                  className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 transition-colors ${
+                    isDark ? "hover:bg-[#18091b]/50" : "hover:bg-[#fbf5f8]"
+                  }`}
+                >
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-tr from-[#2a0e28] to-[#3b1538] text-xs font-bold text-[#f49bbd] border border-[#d9487d]/20 shrink-0">
+                      {(a.clientName || a.customerName || a.user?.name || "C")
+                        .charAt(0)
+                        .toUpperCase()}
+                    </div>
+                    <div className="min-w-0">
+                      <p
+                        className={`text-sm font-semibold truncate ${
+                          isDark ? "text-white" : "text-[#1e0a1d]"
+                        }`}
+                      >
+                        {a.clientName || a.customerName || a.user?.name || `Cliente #${a.id}`}
+                      </p>
+                      <p className={`text-xs truncate ${isDark ? "text-[#a88ea4]" : "text-[#765a71]"}`}>
+                        {serviceName || "Servicio no especificado"}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p
-                      className={`text-sm font-semibold ${
-                        isDark ? "text-white" : "text-[#1e0a1d]"
+
+                  <div className="flex items-center gap-3 self-start sm:self-center shrink-0">
+                    <span
+                      className={`rounded-full px-3 py-1 text-[11px] font-semibold tracking-wider uppercase border ${
+                        statusStyle[a.status] || "bg-gray-800 text-gray-300 border-gray-700"
                       }`}
                     >
-                      {a.clientName || a.customerName || a.user?.name || `Cliente #${a.id}`}
-                    </p>
-                    <p className={`text-xs ${isDark ? "text-[#a88ea4]" : "text-[#765a71]"}`}>
-                      {a.service?.name || `Tratamiento #${a.serviceId}`}
-                    </p>
+                      {statusLabel[a.status] || a.status}
+                    </span>
+
+                    <div className="text-right">
+                      <p
+                        className={`text-xs font-mono font-medium ${
+                          isDark ? "text-white" : "text-[#1e0a1d]"
+                        }`}
+                      >
+                        {a.appointmentDate ||
+                          new Date(a.date).toLocaleDateString("es-VE", {
+                            day: "numeric",
+                            month: "short",
+                          })}
+                      </p>
+                      <p
+                        className={`text-[11px] font-mono ${
+                          isDark ? "text-[#8c6e88]" : "text-[#977391]"
+                        }`}
+                      >
+                        {a.appointmentTime ||
+                          new Date(a.date).toLocaleTimeString("es-VE", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                <div className="flex items-center gap-4 self-end sm:self-center">
-                  <span
-                    className={`rounded-full px-3 py-1 text-[11px] font-semibold tracking-wider uppercase border ${
-                      statusStyle[a.status] || "bg-gray-800 text-gray-300 border-gray-700"
-                    }`}
-                  >
-                    {statusLabel[a.status] || a.status}
-                  </span>
-
-                  <div className="text-right">
-                    <p
-                      className={`text-xs font-mono font-medium ${
-                        isDark ? "text-white" : "text-[#1e0a1d]"
-                      }`}
-                    >
-                      {a.appointmentDate ||
-                        new Date(a.date).toLocaleDateString("es-VE", {
-                          day: "numeric",
-                          month: "short",
-                        })}
-                    </p>
-                    <p
-                      className={`text-[11px] font-mono ${
-                        isDark ? "text-[#8c6e88]" : "text-[#977391]"
-                      }`}
-                    >
-                      {a.appointmentTime ||
-                        new Date(a.date).toLocaleTimeString("es-VE", {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
