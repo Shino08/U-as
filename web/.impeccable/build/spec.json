@@ -1,0 +1,61 @@
+{
+  "comp": ".impeccable/mocks/comp_b.jpg",
+  "width": 1376,
+  "height": 768,
+  "regions": [
+    {
+      "id": "nav",
+      "kind": "chrome",
+      "box": { "x": 0, "y": 0, "w": 1376, "h": 56 },
+      "note": "Top navigation bar: Lumière Nails wordmark left, SERVICIOS · AGENDA · CONTACTO center, Reservar pill right"
+    },
+    {
+      "id": "label-wall",
+      "kind": "chrome",
+      "box": { "x": 0, "y": 56, "w": 620, "h": 490 },
+      "note": "Stacked service index strips: alternating plum-black and rose-mauve horizontal bands, condensed white caps service names left, monospace duration right"
+    },
+    {
+      "id": "hero-photo",
+      "kind": "image",
+      "box": { "x": 620, "y": 56, "w": 756, "h": 560 },
+      "note": "Editorial macro photograph: female hands with long almond pearlescent pink nails holding an opened lacquered box with tissue paper, dark studio background"
+    },
+    {
+      "id": "headline",
+      "kind": "text",
+      "box": { "x": 120, "y": 490, "w": 900, "h": 140 },
+      "note": "Large editorial headline 'Belleza que se siente' in Fraunces light italic, white, 72-80px, crossing both columns",
+      "capHeight": 72,
+      "family": "Fraunces",
+      "weight": 300,
+      "style": "italic",
+      "fontMatch": {
+        "measured": { "capHeightPx": 72, "widthClass": "normal", "weightClass": "light" },
+        "chosen": "Fraunces",
+        "USE": "font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;",
+        "note": "installed face; no browser available for pixel ranking, nearest catalog face recorded"
+      }
+    },
+    {
+      "id": "booking-teaser",
+      "kind": "chrome",
+      "box": { "x": 360, "y": 640, "w": 660, "h": 128 },
+      "note": "Booking teaser card peeking from bottom: 'Reserva tu cita' label in rose, row of 4 date-day chips (Mon Tue Wed Thu)"
+    }
+  ],
+  "palette": {
+    "ground": "oklch(0.12 0.055 330)",
+    "labelPanel": "oklch(0.40 0.11 340)",
+    "labelPanelAlt": "oklch(0.22 0.06 330)",
+    "accent": "oklch(0.62 0.18 345)",
+    "textPrimary": "oklch(0.97 0.01 330)",
+    "textMeta": "oklch(0.70 0.04 340)"
+  },
+  "typeTokens": {
+    "display": { "family": "Fraunces", "weight": 300, "style": "italic", "size": "72px" },
+    "indexLabel": { "family": "system-ui condensed", "weight": 600, "style": "normal", "size": "13px", "textTransform": "uppercase", "letterSpacing": "0.08em" },
+    "meta": { "family": "ui-monospace", "weight": 400, "style": "normal", "size": "11px" },
+    "body": { "family": "Manrope", "weight": 400, "style": "normal", "size": "15px" }
+  }
+}
