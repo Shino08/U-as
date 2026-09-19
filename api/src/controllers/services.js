@@ -62,9 +62,24 @@ export const deleteService = async (req, res) => {
     const service = await Service.findByPk(req.params.id);
     if (!service) return res.status(404).json({ error: "Servicio no encontrado" });
 
-    await service.update({ active: false });
+    await service.destroy();
     res.status(204).send();
   } catch (error) {
+    // If foreign key constraint prevents deletion (e.g. appointments reference this service),
+    // fall back to deactivation and inform the client
+    if (
+      error.name === "SequelizeForeignKeyConstraintError" ||
+      (error.original && error.original.code === "23503")
+    ) {
+      try {
+        const service = await Service.findByPk(req.params.id);
+        if (service) await service.destroy({ force: true }).catch(() => service.update({ active: false }));
+      } catch {}
+      return res.status(409).json({
+        error:
+          "Este servicio tiene citas asociadas y no puede eliminarse por completo. Fue desactivado en su lugar.",
+      });
+    }
     res.status(500).json({ error: error.message });
   }
 };

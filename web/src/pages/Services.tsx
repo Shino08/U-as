@@ -432,8 +432,13 @@ export default function Services() {
       description: `¿Estás segura de que deseas eliminar permanentemente "${svc.name}" de la carta de servicios? Esta acción no se puede deshacer.`,
       confirmText: "Eliminar Servicio",
       onConfirm: async () => {
-        await api.delete(`/services/${svc.id}`);
-        loadData();
+        try {
+          await api.delete(`/services/${svc.id}`);
+          setServices((prev) => prev.filter((s) => s.id !== svc.id));
+        } catch (err: any) {
+          showAlert("Aviso", err.message || "No se pudo eliminar el tratamiento.");
+          loadData();
+        }
       },
     });
   };
