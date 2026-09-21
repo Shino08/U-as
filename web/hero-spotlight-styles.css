@@ -1,0 +1,48 @@
+/*
+  Agrega este bloque a src/styles.css (o impórtalo aparte).
+  Es el CSS que hace el "recorte" circular (mask) que sigue al cursor
+  y revela la capa a color sobre la capa apagada de uñas.
+*/
+
+.hero-spotlight {
+  cursor: none;
+}
+
+.hero-spotlight .reveal-layer {
+  opacity: 0;
+  -webkit-mask-image: radial-gradient(
+    circle var(--r, 200px) at var(--x) var(--y),
+    #000 0%,
+    #000 60%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--r, 200px) at var(--x) var(--y),
+    #000 0%,
+    #000 60%,
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  transition: --x 0.12s ease-out, --y 0.12s ease-out, opacity 0.15s ease-out;
+}
+
+.hero-spotlight:hover .reveal-layer {
+  opacity: 1;
+}
+
+.hero-spotlight .reveal-layer.is-leaving {
+  transition: opacity 0.15s ease-out;
+}
+
+@property --x {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: -9999px;
+}
+
+@property --y {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: -9999px;
+}
