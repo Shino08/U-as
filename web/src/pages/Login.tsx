@@ -1,203 +1,172 @@
 import { useState, type FormEvent } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft, ArrowRight, Eye, EyeOff, Sparkles } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/context/ThemeContext";
-import {
-  MdVisibility,
-  MdVisibilityOff,
-  MdArrowBack,
-  MdLockOutline,
-  MdMailOutline,
-} from "react-icons/md";
-import { Sparkles, Sun, Moon } from "lucide-react";
+import { cn } from "@/lib/utils";
+import brandPhoto from "@/assets/lumiere-hero.jpg";
 
 export default function Login() {
-  const { login } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const { login, register } = useAuth();
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  const [isRegisterMode, setIsRegisterMode] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPw, setShowPw] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
-    setLoading(true);
+    setError(null);
+    setIsSubmitting(true);
     try {
-      await login(email, password);
+      if (isRegisterMode) await register(name, email, password);
+      else await login(email, password);
       navigate("/admin");
-    } catch (err: any) {
-      setError(err.message || "Credenciales incorrectas");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No pudimos verificar tus datos. Inténtalo de nuevo.");
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
-
-  const isDark = theme === "dark";
+  const inputClass = cn(
+    "block w-full text-base rounded-xl border px-4 py-3.5 outline-none transition-colors",
+    isDark
+      ? "bg-[#0a050c] border-[#261025] text-white placeholder:text-[#523b4f] focus:border-[#d9487d]"
+      : "bg-white border-[#ebdce7] text-[#1d0f1c] placeholder:text-zinc-400 focus:border-[#d9487d]"
+  );
+  const labelClass = cn("block text-xs font-semibold mb-2", isDark ? "text-[#a890a5]" : "text-[#695365]");
 
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-300 ${
-        isDark
-          ? "bg-[#0a030b] text-[#fbf7fa]"
-          : "bg-[#fcf7fa] text-[#1e0a1d]"
-      } selection:bg-[#d9487d] selection:text-white`}
-    >
-      {/* Luces ambientales adaptativas */}
-      <div
-        className={`pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[580px] h-[580px] rounded-full blur-[120px] transition-opacity duration-300 ${
-          isDark ? "bg-[#d9487d]/15 opacity-100" : "bg-[#d9487d]/10 opacity-70"
-        }`}
-      />
-      <div
-        className={`pointer-events-none absolute -bottom-24 -right-24 w-80 h-80 rounded-full blur-[100px] transition-opacity duration-300 ${
-          isDark ? "bg-[#a32a68]/10" : "bg-[#e25d8f]/10"
-        }`}
-      />
+    <div className={cn("min-h-screen grid lg:grid-cols-2 transition-colors", isDark ? "bg-[#0a050c] text-[#f8f2f6]" : "bg-white text-[#1d0f1c]")}>
+      {/* Panel de marca a pantalla completa */}
+      <section className="relative hidden lg:flex flex-col justify-between p-10 min-h-screen overflow-hidden isolate">
+        <img src={brandPhoto} alt="Manicura de autor Lumière Nails" className="absolute inset-0 -z-20 w-full h-full object-cover" />
+        <div
+          className="absolute inset-0 -z-10"
+          style={{ background: "radial-gradient(58% 78% at -6% 30%, rgba(217,72,125,0.45) 0%, rgba(217,72,125,0) 62%), linear-gradient(to top, rgba(10,5,12,0.92) 0%, rgba(10,5,12,0.5) 45%, rgba(10,5,12,0.08) 75%)" }}
+        />
 
-      {/* Barra superior de navegación: Volver al salón + Cambio de Tema */}
-      <div className="absolute top-6 inset-x-6 flex items-center justify-between z-20">
-        <Link
-          to="/"
-          className={`inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full border transition-all duration-200 shadow-md ${
-            isDark
-              ? "border-[#2b0f2a] bg-[#140616]/70 text-[#c8a9c4] hover:text-white hover:border-[#d9487d]/40"
-              : "border-[#edd5e5] bg-white/80 text-[#765a71] hover:text-[#1e0a1d] hover:border-[#d9487d]"
-          } backdrop-blur-md`}
-        >
-          <MdArrowBack className="size-4" />
-          <span>Volver al Salón</span>
+        <Link to="/" aria-label="Volver al sitio" className="inline-flex items-center justify-center size-14 rounded-full bg-white text-[#1d0f1c] shadow-xl hover:-translate-x-1 transition-transform">
+          <ArrowLeft className="size-5" />
         </Link>
 
-        <button
-          onClick={toggleTheme}
-          className={`flex size-10 items-center justify-center rounded-full border transition-all duration-200 shadow-md cursor-pointer ${
-            isDark
-              ? "border-[#2b0f2a] bg-[#140616]/70 text-amber-300 hover:border-[#d9487d]/40 hover:scale-105"
-              : "border-[#edd5e5] bg-white/80 text-[#765a71] hover:text-[#d9487d] hover:border-[#d9487d] hover:scale-105"
-          } backdrop-blur-md`}
-          title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-        >
-          {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-        </button>
-      </div>
-
-      {/* Tarjeta editorial de Login */}
-      <div
-        className={`w-full max-w-[390px] rounded-3xl border p-8 sm:p-9 shadow-2xl relative z-10 backdrop-blur-xl transition-all duration-300 ${
-          isDark
-            ? "border-[#2d102c] bg-[#130615]/90 shadow-black/80 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-[#d9487d]/50 before:to-transparent"
-            : "border-[#eed8e7] bg-white/95 shadow-[#d9487d]/10 before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-[#d9487d]/40 before:to-transparent"
-        }`}
-      >
-        {/* Header con Monograma de Lujo */}
-        <div className="mb-7 text-center">
-          <div className="mx-auto mb-3.5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#d9487d] via-[#e25d8f] to-[#f49bbd] text-white font-display italic text-2xl font-bold shadow-lg shadow-[#d9487d]/35 border border-white/20">
-            L
-          </div>
-          <h1
-            className={`font-display italic text-2xl sm:text-3xl font-light tracking-tight ${
-              isDark ? "text-white" : "text-[#1e0a1d]"
-            }`}
-          >
-            Lumière Nails
-          </h1>
-          <div className="inline-flex items-center gap-1.5 mt-1.5 px-3 py-0.5 rounded-full bg-[#d9487d]/10 border border-[#d9487d]/20 text-[11px] font-semibold tracking-wider uppercase text-[#d9487d]">
-            <Sparkles className="size-3 animate-pulse text-[#d9487d]" />
-            <span>Portal de Administración</span>
-          </div>
-          <p className={`mt-2 text-xs ${isDark ? "text-[#a488a0]" : "text-[#765a71]"}`}>
-            Gestión de servicios, lookbook y citas exclusivas
+        <div className="max-w-lg" style={{ color: "#E8E0D2" }}>
+          <h2 className="font-display text-4xl lg:text-5xl font-light leading-tight mb-5">
+            Un estudio que <span className="italic">cuida cada detalle.</span>
+          </h2>
+          <p className="text-sm leading-relaxed opacity-80 mb-7 max-w-md">
+            Gestiona tu catálogo de servicios, tu Lookbook y las citas de tus clientas desde un mismo panel, pensado para el ritmo de un estudio de nail art de autor.
           </p>
+          <Link to="/" className="inline-flex items-center gap-3 text-sm font-semibold text-white border-b border-white/30 hover:border-white/90 pb-1 transition-colors group">
+            Explorar el sitio de Lumière Nails
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
+      </section>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {error && (
-            <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-xs text-rose-300 leading-relaxed animate-shake">
-              {error}
+      {/* Panel de formulario */}
+      <section className="flex items-center justify-center px-6 py-16 sm:px-10 lg:px-20">
+        <div className="w-full max-w-[404px]">
+          <span className="inline-flex size-11 items-center justify-center rounded-full bg-gradient-to-tr from-[#d9487d] to-[#f29ebb] text-white shadow-lg shadow-[#d9487d]/30 mb-6">
+            <Sparkles className="size-5" />
+          </span>
+
+          <h1 className="font-display text-2xl sm:text-3xl font-light mb-3">
+            {isRegisterMode ? "Crea tu cuenta de estudio" : "Inicia sesión en tu panel"}
+          </h1>
+          <span className="block w-7 h-[3px] rounded-full bg-[#d9487d] mb-8" />
+
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            {isRegisterMode && (
+              <div>
+                <label htmlFor="name" className={labelClass}>Nombre completo</label>
+                <input id="name" type="text" autoComplete="name" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Valentina Rivas" className={inputClass} />
+              </div>
+            )}
+
+            <div>
+              <label htmlFor="email" className={labelClass}>Correo electrónico</label>
+              <input id="email" type="email" autoComplete="email" autoFocus required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="tucorreo@lumierenails.com" className={inputClass} />
             </div>
-          )}
 
-          <div className="space-y-1.5">
-            <label
-              className={`text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1.5 ${
-                isDark ? "text-[#d0b4cc]" : "text-[#5e4359]"
-              }`}
-            >
-              <MdMailOutline className="size-3.5 text-[#d9487d]" />
-              <span>Correo Electrónico</span>
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className={`h-11 w-full rounded-xl border px-3.5 text-sm transition-all duration-200 focus:border-[#d9487d] focus:outline-none focus:ring-2 focus:ring-[#d9487d]/20 ${
-                isDark
-                  ? "border-[#2d102c] bg-[#1c081e]/90 text-[#fbf7fa] placeholder:text-[#6e526b]"
-                  : "border-[#e6d0df] bg-[#fbf7fa] text-[#1e0a1d] placeholder:text-[#b192ab]"
-              }`}
-              placeholder="admin@lumierenails.com"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <label
-              className={`text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1.5 ${
-                isDark ? "text-[#d0b4cc]" : "text-[#5e4359]"
-              }`}
-            >
-              <MdLockOutline className="size-3.5 text-[#d9487d]" />
-              <span>Contraseña</span>
-            </label>
-            <div className="relative">
-              <input
-                type={showPw ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className={`h-11 w-full rounded-xl border px-3.5 pr-10 text-sm transition-all duration-200 focus:border-[#d9487d] focus:outline-none focus:ring-2 focus:ring-[#d9487d]/20 ${
-                  isDark
-                    ? "border-[#2d102c] bg-[#1c081e]/90 text-[#fbf7fa] placeholder:text-[#6e526b]"
-                    : "border-[#e6d0df] bg-[#fbf7fa] text-[#1e0a1d] placeholder:text-[#b192ab]"
-                }`}
-                placeholder="••••••••••••"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPw(!showPw)}
-                className={`absolute right-3 top-1/2 -translate-y-1/2 transition-colors cursor-pointer ${
-                  isDark ? "text-[#8c6e88] hover:text-white" : "text-[#977892] hover:text-[#1e0a1d]"
-                }`}
-                title={showPw ? "Ocultar contraseña" : "Ver contraseña"}
-              >
-                {showPw ? (
-                  <MdVisibilityOff className="size-4" />
-                ) : (
-                  <MdVisibility className="size-4" />
-                )}
-              </button>
+            <div>
+              <label htmlFor="password" className={labelClass}>Contraseña</label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete={isRegisterMode ? "new-password" : "current-password"}
+                  required
+                  minLength={6}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className={cn(inputClass, "pr-12")}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-current/50 hover:text-[#d9487d] transition-colors cursor-pointer"
+                >
+                  {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                </button>
+              </div>
             </div>
+
+            {error && (
+              <div className="p-3 rounded-xl border border-rose-500/40 bg-rose-950/40 text-rose-200 text-xs">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center gap-3 rounded-xl py-4 text-xs font-bold uppercase tracking-[0.08em] text-white bg-gradient-to-r from-[#d9487d] to-[#f29ebb] shadow-lg shadow-[#d9487d]/25 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer mt-2"
+            >
+              {isSubmitting ? "Verificando..." : isRegisterMode ? "Crear cuenta" : "Continuar"}
+            </button>
+          </form>
+
+          <div className={cn("flex items-center gap-4 my-6 text-[11px] font-semibold tracking-[0.08em]", isDark ? "text-[#a890a5]" : "text-[#695365]")}>
+            <span className={cn("flex-1 h-px", isDark ? "bg-[#261025]" : "bg-[#ebdce7]")} />
+            O
+            <span className={cn("flex-1 h-px", isDark ? "bg-[#261025]" : "bg-[#ebdce7]")} />
           </div>
 
           <button
-            type="submit"
-            disabled={loading}
-            className="h-11 w-full mt-2 rounded-xl bg-gradient-to-r from-[#d9487d] via-[#c93e72] to-[#b32e60] hover:from-[#e3568b] hover:via-[#d9487d] hover:to-[#c2366b] text-sm font-semibold text-white shadow-lg shadow-[#d9487d]/25 hover:shadow-xl hover:shadow-[#d9487d]/35 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2 cursor-pointer"
-          >
-            {loading ? (
-              <span className="inline-block size-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-            ) : (
-              <span>Acceder al Panel</span>
+            type="button"
+            onClick={() => {
+              setIsRegisterMode((v) => !v);
+              setError(null);
+            }}
+            className={cn(
+              "w-full rounded-xl py-3.5 text-sm font-semibold border transition-colors cursor-pointer",
+              isDark ? "border-[#2b1328] text-white hover:bg-[#160918]" : "border-[#ebdce7] text-[#1d0f1c] hover:bg-[#faf4f8]"
             )}
+          >
+            {isRegisterMode ? "Ya tengo una cuenta" : "Crear una cuenta nueva"}
           </button>
-        </form>
 
+          <p className="mt-6 text-center">
+            <Link to="/" className="text-sm underline underline-offset-4 decoration-1 hover:text-[#d9487d] transition-colors">
+              Volver al sitio de Lumière Nails
+            </Link>
+          </p>
 
-      </div>
+          <p className={cn("mt-6 text-xs leading-relaxed", isDark ? "text-[#a890a5]" : "text-[#695365]")}>
+            Este acceso es exclusivo para el equipo administrativo de Lumière Nails Studio. Si eres clienta, no necesitas iniciar sesión para reservar tu cita.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
