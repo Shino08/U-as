@@ -60,24 +60,29 @@ export const RITUAL_STEPS: RitualStep[] = [
 
 export const FAQS: FAQItem[] = [
   {
-    question: "¿Cuánto dura el esmaltado y el nail art?",
+    question: "¿Cómo reservo mi cita en línea?",
     answer:
-      "Nuestra manicura rusa con nivelación rubber y sellado de alta gama dura entre 21 y 28 días intacta, sin astillarse ni perder su brillo espejo. Ofrecemos 14 días de garantía total con retoque gratuito si surge algún detalle.",
+      "Elige tu servicio en el catálogo, selecciona el día y la franja horaria disponible, y completa tus datos de contacto. Recibirás la confirmación al instante por correo, sin necesidad de pagar por adelantado.",
   },
   {
-    question: "¿La manicura rusa debilita o adelgaza la uña natural?",
+    question: "¿Cuál es la política de cancelación o reprogramación?",
     answer:
-      "Al contrario. La técnica se realiza en seco con fresas diamantadas de grano suave y precisión milimétrica. Nunca sobrelimamos la superficie natural; por el contrario, la base niveladora rubber protege la lámina ungueal, permitiendo que tu uña crezca fuerte, sana y resistente.",
+      "Puedes reprogramar o cancelar tu cita hasta 12 horas antes sin ningún cargo, escribiéndonos por WhatsApp con tu código de reserva. Las cancelaciones fuera de este plazo pueden requerir un nuevo agendamiento según disponibilidad.",
   },
   {
-    question: "¿Qué insumos y estándares de higiene utilizan?",
+    question: "¿Qué medidas de bioseguridad manejan en el estudio?",
     answer:
-      "Cumplimos con bioseguridad grado clínico: todo instrumental metálico pasa por lavado ultrasónico y esterilización en autoclave hospitalaria a 134°C, abriendo el sobre sellado con testigo biológico frente a ti. Limas, bloques y campos de trabajo son 100% descartables por clienta.",
+      "Todo nuestro instrumental se esteriliza en autoclave entre cada clienta, usamos limas y buffers desechables por sesión, y nuestras especialistas trabajan con guantes y superficies desinfectadas en cada estación.",
   },
   {
-    question: "¿Cómo funcionan las cancelaciones y formas de pago?",
+    question: "¿Qué formas de pago aceptan?",
     answer:
-      "No requerimos depósitos ni cobros por adelantado en la reserva web. Pagas cómodamente al finalizar tu sesión en el estudio mediante Zelle, Efectivo, Pago Móvil o Tarjeta de débito/crédito. Si necesitas reprogramar, puedes hacerlo con al menos 12 horas de anticipación sin costo adicional.",
+      "Aceptas pagar cómodamente en el estudio al finalizar tu sesión, con efectivo, pago móvil, transferencia o tarjeta. La reserva en línea no requiere adelanto ni tarjeta registrada.",
+  },
+  {
+    question: "¿Cuánto duran los diseños de nail art o extensiones?",
+    answer:
+      "En promedio una extensión de gel dura entre 3 y 4 semanas con el mantenimiento adecuado, y una manicura clásica entre 2 y 3 semanas. Cada especialista te recomendará el retoque ideal según tu tipo de uña.",
   },
 ];
 
