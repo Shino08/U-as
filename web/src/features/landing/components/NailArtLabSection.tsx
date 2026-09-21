@@ -32,7 +32,7 @@ export function NailArtLabSection({
       <div className="max-w-7xl mx-auto">
         <div
           className={cn(
-            "rounded-3xl border p-6 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden transition-colors",
+            "rounded-3xl border p-5 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden transition-colors",
             isDark
               ? "bg-gradient-to-br from-[#160918] via-[#120614] to-[#1c0b1e] border-[#3b1738]"
               : "bg-gradient-to-br from-[#ffffff] via-[#faf4f8] to-[#fceef5] border-[#ebdce7]"
@@ -51,11 +51,11 @@ export function NailArtLabSection({
               </p>
 
               <div className="space-y-3">
-                <div className={cn("p-4 rounded-2xl border flex items-center justify-between gap-4 transition-all", isDark ? "bg-[#0a050c] border-[#2b1328]" : "bg-white border-[#ebdce7] shadow-sm")}>
+                <div className={cn("p-4 rounded-2xl border flex items-center justify-between gap-3 sm:gap-4 transition-all", isDark ? "bg-[#0a050c] border-[#2b1328]" : "bg-white border-[#ebdce7] shadow-sm")}>
                   <div className="flex items-center gap-3 min-w-0">
                     <img src={selectedService?.image || classicImage} alt="" className="size-12 rounded-xl object-cover shrink-0 border border-current/10" />
                     <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
+                      <div className="flex items-center gap-1.5 flex-wrap">
                         <span className="text-[10px] uppercase font-bold text-[#d9487d] block">Servicio Base</span>
                         <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-current/10 text-current/70 uppercase">{selectedService?.category}</span>
                       </div>
@@ -71,7 +71,7 @@ export function NailArtLabSection({
                     <div className="flex items-center gap-3 min-w-0">
                       <img src={selectedLookbook.image} alt="" className="size-11 rounded-xl object-cover shrink-0 border border-current/10" />
                       <div className="min-w-0">
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="text-[10px] uppercase font-bold text-[#d9487d] block">Inspiración Lookbook</span>
                           <span className="text-[9px] px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10 text-current/70">{selectedLookbook.category}</span>
                         </div>
@@ -84,7 +84,7 @@ export function NailArtLabSection({
                         <span className="text-xs font-bold text-[#d9487d] block">Est. ${selectedLookbook.estimatedPrice}</span>
                         <span className="text-[9px] text-current/60">{selectedLookbook.durationBonus}</span>
                       </div>
-                      <button type="button" onClick={onClearLookbook} className="p-1 rounded-lg text-current/40 hover:text-rose-400 hover:bg-rose-500/10 cursor-pointer" title="Quitar diseño">
+                      <button type="button" onClick={onClearLookbook} className="p-1 rounded-lg text-current/40 hover:text-rose-400 hover:bg-rose-500/10 cursor-pointer min-h-[32px] min-w-[32px] flex items-center justify-center" title="Quitar diseño">
                         <X className="size-4" />
                       </button>
                     </div>
@@ -107,19 +107,19 @@ export function NailArtLabSection({
                       type="button"
                       onClick={() => onToggleAddon(addon.id)}
                       className={cn(
-                        "w-full p-4 rounded-2xl border text-left transition-all flex items-center justify-between cursor-pointer",
+                        "w-full p-3.5 sm:p-4 rounded-2xl border text-left transition-all flex items-center justify-between gap-3 cursor-pointer min-h-[52px]",
                         isChecked
                           ? isDark ? "bg-[#250d23] border-[#d9487d] text-white shadow-md" : "bg-[#fcedf5] border-[#d9487d] text-[#1d0f1c] shadow-sm"
                           : isDark ? "bg-[#0f0612] border-[#261125] text-[#a890a5] hover:border-[#421b3e]" : "bg-white border-[#ebdce7] text-[#695365] hover:border-[#d9487d]"
                       )}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className={cn("size-5 rounded-md border flex items-center justify-center transition-colors", isChecked ? "bg-[#d9487d] border-[#d9487d] text-white" : "border-current/30 bg-transparent")}>
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className={cn("size-5 rounded-md border flex items-center justify-center transition-colors shrink-0", isChecked ? "bg-[#d9487d] border-[#d9487d] text-white" : "border-current/30 bg-transparent")}>
                           {isChecked && <Check className="size-3.5" />}
                         </div>
-                        <div>
-                          <p className="text-xs font-semibold">{addon.name}</p>
-                          <p className="text-[11px] text-current/60">{addon.description}</p>
+                        <div className="min-w-0">
+                          <p className="text-xs font-semibold truncate sm:whitespace-normal">{addon.name}</p>
+                          <p className="text-[11px] text-current/60 line-clamp-1 sm:line-clamp-none">{addon.description}</p>
                         </div>
                       </div>
                       <div className="text-right shrink-0">
@@ -131,7 +131,7 @@ export function NailArtLabSection({
                 })}
               </div>
 
-              <div className={cn("pt-4 flex items-center justify-between border-t", isDark ? "border-[#2a1327]" : "border-[#ebdce7]")}>
+              <div className={cn("pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t", isDark ? "border-[#2a1327]" : "border-[#ebdce7]")}>
                 <div>
                   <span className="text-xs text-current/60 block">Total Estimado:</span>
                   <div className="flex items-baseline gap-2">
@@ -139,7 +139,10 @@ export function NailArtLabSection({
                     <span className="text-xs text-[#d9487d] font-mono">({calculatedDuration} min)</span>
                   </div>
                 </div>
-                <a href="#reserva" className="px-6 py-2.5 rounded-full bg-[#d9487d] hover:bg-[#e8709a] text-white text-xs font-bold uppercase tracking-wider shadow-lg transition-all">
+                <a
+                  href="#reserva"
+                  className="w-full sm:w-auto text-center px-6 py-3 sm:py-2.5 rounded-full bg-[#d9487d] hover:bg-[#e8709a] text-white text-xs font-bold uppercase tracking-wider shadow-lg transition-all min-h-[44px] flex items-center justify-center"
+                >
                   Continuar a la Cita →
                 </a>
               </div>

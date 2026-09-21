@@ -69,7 +69,7 @@ export function ServiceCard({ service, isSelected, onSelect }: ServiceCardProps)
           type="button"
           onClick={() => onSelect(service.id)}
           className={cn(
-            "px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer",
+            "px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer min-h-[36px] flex items-center justify-center",
             isSelected
               ? "bg-[#d9487d] text-white shadow-md shadow-[#d9487d]/30"
               : isDark

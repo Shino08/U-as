@@ -17,10 +17,10 @@ export function FaqSection() {
         isDark ? "bg-[#0e0610] border-[#261226]" : "bg-[#f5eef4] border-[#ebdce7]"
       )}
     >
-      <div className="w-full px-5 sm:px-8 lg:px-14 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-[minmax(0,560px)_1fr] gap-10 lg:gap-20 items-start">
+      <div className="w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-[minmax(0,520px)_1fr] gap-8 lg:gap-16 items-start">
           {/* Foto editorial de uñas */}
-          <div className="w-full h-64 sm:h-96 lg:h-[640px] rounded-3xl overflow-hidden order-1 lg:order-none shadow-2xl border border-current/10">
+          <div className="w-full h-56 sm:h-72 lg:h-[580px] rounded-3xl overflow-hidden shadow-2xl border border-current/10 order-first lg:order-none">
             <img
               src={faqPhoto}
               alt="Manicura de autor Lumière Nails"
@@ -30,7 +30,7 @@ export function FaqSection() {
           </div>
 
           {/* Columna de contenido y acordeón */}
-          <div className="lg:pt-6 max-w-xl">
+          <div className="lg:pt-4 max-w-xl">
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#d9487d]">
               Claridad &amp; Confianza
             </span>
@@ -47,7 +47,7 @@ export function FaqSection() {
               preocupaciones a tu cita.
             </p>
 
-            <div className="mt-10">
+            <div className="mt-8 sm:mt-10">
               {FAQS.map((faq, index) => {
                 const isOpen = openIndex === index;
                 return (
@@ -62,11 +62,11 @@ export function FaqSection() {
                       type="button"
                       onClick={() => setOpenIndex(isOpen ? null : index)}
                       aria-expanded={isOpen}
-                      className="w-full py-5 text-left flex items-start justify-between gap-6 cursor-pointer select-none group"
+                      className="w-full py-4 sm:py-5 text-left flex items-start justify-between gap-4 sm:gap-6 cursor-pointer select-none group min-h-[48px]"
                     >
                       <span
                         className={cn(
-                          "font-display text-lg sm:text-xl font-normal transition-colors",
+                          "font-display text-base sm:text-xl font-normal transition-colors",
                           isOpen ? "text-[#d9487d]" : "group-hover:text-[#d9487d]"
                         )}
                       >

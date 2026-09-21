@@ -14,7 +14,7 @@ export function RitualSection() {
         theme === "dark" ? "bg-[#0e0610] border-[#261226]" : "bg-[#f5eef4] border-[#ebdce7]"
       )}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-8 md:mb-16 space-y-3">
           <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#d9487d]">
             La Filosofía Lumière
@@ -28,21 +28,21 @@ export function RitualSection() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {RITUAL_STEPS.map((step) => (
             <div
               key={step.num}
               className={cn(
-                "p-7 rounded-3xl border relative group hover:border-[#d9487d]/50 transition-all duration-300 flex flex-col justify-between",
+                "p-5 sm:p-7 rounded-3xl border relative group hover:border-[#d9487d]/50 transition-all duration-300 flex flex-col justify-between h-full",
                 theme === "dark" ? "bg-[#140816] border-[#2b1328]" : "bg-white border-[#ebdce7]"
               )}
             >
               <div>
-                <span className="font-display italic text-4xl font-light text-[#d9487d]/40 group-hover:text-[#d9487d] transition-colors block mb-4">
+                <span className="font-display italic text-4xl font-light text-[#d9487d]/40 group-hover:text-[#d9487d] transition-colors block mb-3 sm:mb-4">
                   {step.num}
                 </span>
-                <h3 className="font-display text-xl font-medium mb-1">{step.title}</h3>
-                <p className="text-xs font-semibold text-[#d9487d] mb-3">{step.subtitle}</p>
+                <h3 className="font-display text-lg sm:text-xl font-medium mb-1">{step.title}</h3>
+                <p className="text-xs font-semibold text-[#d9487d] mb-2 sm:mb-3">{step.subtitle}</p>
                 <p className={cn("text-xs leading-relaxed", theme === "dark" ? "text-[#a890a5]" : "text-[#695365]")}>
                   {step.desc}
                 </p>
@@ -50,7 +50,7 @@ export function RitualSection() {
 
               <div
                 className={cn(
-                  "pt-6 mt-6 border-t flex items-center justify-between text-[11px] text-current/50",
+                  "pt-5 sm:pt-6 mt-5 sm:mt-6 border-t flex items-center justify-between text-[11px] text-current/50",
                   theme === "dark" ? "border-[#230d22]" : "border-[#ebdce7]"
                 )}
               >

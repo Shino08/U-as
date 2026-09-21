@@ -43,8 +43,9 @@ export function useBooking(servicesList: Service[], defaultDate: string) {
       const found = ADDONS.find((a) => a.id === id);
       return acc + (found ? found.price : 0);
     }, 0);
-    return (selectedService?.price ?? 0) + addonsTotal;
-  }, [selectedService, selectedAddons]);
+    const lookbookPrice = selectedLookbook?.estimatedPrice ?? 0;
+    return Number(((selectedService?.price ?? 0) + lookbookPrice + addonsTotal).toFixed(2));
+  }, [selectedService, selectedLookbook, selectedAddons]);
 
   const calculatedDuration = useMemo(() => {
     const addonsMinutes = selectedAddons.reduce((acc, id) => {

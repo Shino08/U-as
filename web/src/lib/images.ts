@@ -4,6 +4,7 @@ import gelImage from "@/assets/service-gel.jpg";
 import chromeImage from "@/assets/lookbook-chrome.jpg";
 import cateyeImage from "@/assets/lookbook-cateye.jpg";
 import heroImage from "@/assets/lumiere-hero.jpg";
+import spotlightImage from "@/assets/hero-spotlight.jpg";
 
 export const IMAGE_MAP: Record<string, string> = {
   "service-classic.jpg": classicImage,
@@ -12,12 +13,14 @@ export const IMAGE_MAP: Record<string, string> = {
   "lookbook-chrome.jpg": chromeImage,
   "lookbook-cateye.jpg": cateyeImage,
   "lumiere-hero.jpg": heroImage,
+  "hero-spotlight.jpg": spotlightImage,
   "/service-classic.jpg": classicImage,
   "/service-art.jpg": artImage,
   "/service-gel.jpg": gelImage,
   "/lookbook-chrome.jpg": chromeImage,
   "/lookbook-cateye.jpg": cateyeImage,
   "/lumiere-hero.jpg": heroImage,
+  "/hero-spotlight.jpg": spotlightImage,
 };
 
 export const PRESET_IMAGES = [

@@ -38,8 +38,8 @@ export function BookingSummary({
       </div>
 
       <div className={cn("p-4 sm:p-5 rounded-2xl border transition-all space-y-3.5", isDark ? "bg-[#0a050c] border-[#261025]" : "bg-[#faf4f8] border-[#ebdce7]")}>
-        <div className="flex items-center gap-4">
-          <img src={selectedService?.image || classicImage} alt="" className="size-16 rounded-xl object-cover shrink-0 border border-current/10" />
+        <div className="flex items-center gap-3.5 sm:gap-4">
+          <img src={selectedService?.image || classicImage} alt="" className="size-14 sm:size-16 rounded-xl object-cover shrink-0 border border-current/10" />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5 flex-wrap">
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#d9487d]/15 text-[#d9487d] border border-[#d9487d]/20">
@@ -61,7 +61,7 @@ export function BookingSummary({
         {selectedLookbook && (
           <div className={cn("p-3 rounded-xl border flex items-center justify-between gap-3", isDark ? "bg-[#180a1a] border-[#381635]" : "bg-white border-[#ebdce7]")}>
             <div className="flex items-center gap-3 min-w-0">
-              <img src={selectedLookbook.image} alt="" className="size-12 rounded-lg object-cover shrink-0 border border-current/10" />
+              <img src={selectedLookbook.image} alt="" className="size-11 sm:size-12 rounded-lg object-cover shrink-0 border border-current/10" />
               <div className="min-w-0">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#d9487d] block">Diseño Lookbook</span>
                 <p className="text-xs font-semibold truncate leading-tight mt-0.5">{selectedLookbook.title} ({selectedLookbook.category})</p>
@@ -73,7 +73,7 @@ export function BookingSummary({
                 <span className="text-xs font-bold text-[#d9487d] block">Est. ${selectedLookbook.estimatedPrice}</span>
                 <span className="text-[10px] text-current/60 font-mono">{selectedLookbook.durationBonus}</span>
               </div>
-              <button type="button" onClick={onClearLookbook} className="p-1 rounded-md text-current/40 hover:text-rose-400 hover:bg-rose-500/10 cursor-pointer" title="Quitar diseño">
+              <button type="button" onClick={onClearLookbook} className="p-1 rounded-md text-current/40 hover:text-rose-400 hover:bg-rose-500/10 cursor-pointer min-h-[32px] min-w-[32px] flex items-center justify-center" title="Quitar diseño">
                 <X className="size-4" />
               </button>
             </div>
@@ -94,7 +94,7 @@ export function BookingSummary({
                   <span key={id} className={cn("inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs border", isDark ? "bg-[#18091a] border-[#2b1229] text-white" : "bg-white border-[#ecdde8] text-[#1d0f1c]")}>
                     <span>{add.name}</span>
                     <span className="text-[#d9487d] font-bold">+${add.price}</span>
-                    <button type="button" onClick={() => onToggleAddon(id)} className="text-current/40 hover:text-rose-400 cursor-pointer ml-0.5" title="Quitar">
+                    <button type="button" onClick={() => onToggleAddon(id)} className="text-current/40 hover:text-rose-400 cursor-pointer ml-0.5 p-0.5" title="Quitar">
                       <X className="size-3" />
                     </button>
                   </span>
@@ -104,7 +104,7 @@ export function BookingSummary({
           </div>
         )}
 
-        <div className="pt-2.5 border-t border-current/10 flex items-center justify-between text-xs">
+        <div className="pt-2.5 border-t border-current/10 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 text-xs">
           <span className="text-current/60 font-medium">Tiempo e Inversión Total:</span>
           <div className="flex items-baseline gap-1.5">
             <span className="text-current/60 font-mono text-xs">{calculatedDuration} min ·</span>

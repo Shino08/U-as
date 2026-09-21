@@ -35,8 +35,8 @@ export function LookbookSection({
         isDark ? "bg-[#0e0610] border-[#261226]" : "bg-[#f5eef4] border-[#ebdce7]"
       )}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
           <div>
             <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#d9487d]">
               Inspiración &amp; Estilo
@@ -49,12 +49,12 @@ export function LookbookSection({
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 sm:gap-4 shrink-0">
             <a
               href="#reserva"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#d9487d] hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#d9487d] hover:underline"
             >
-              <span>Pedir un diseño de referencia</span>
+              <span>Pedir diseño de referencia</span>
               <ArrowRight className="size-3.5" />
             </a>
 
@@ -65,7 +65,7 @@ export function LookbookSection({
                   onClick={() => scrollRail("left")}
                   aria-label="Diseños anteriores"
                   className={cn(
-                    "size-11 rounded-full border flex items-center justify-center shadow-sm transition-all cursor-pointer hover:scale-105 active:scale-95",
+                    "size-10 sm:size-11 rounded-full border flex items-center justify-center shadow-sm transition-all cursor-pointer hover:scale-105 active:scale-95 shrink-0",
                     isDark
                       ? "border-[#2b1328] bg-[#160918] text-white hover:border-[#d9487d]"
                       : "border-[#ebdce7] bg-white text-gray-800 hover:border-[#d9487d]"
@@ -78,7 +78,7 @@ export function LookbookSection({
                   onClick={() => scrollRail("right")}
                   aria-label="Más diseños"
                   className={cn(
-                    "size-11 rounded-full border flex items-center justify-center shadow-sm transition-all cursor-pointer hover:scale-105 active:scale-95",
+                    "size-10 sm:size-11 rounded-full border flex items-center justify-center shadow-sm transition-all cursor-pointer hover:scale-105 active:scale-95 shrink-0",
                     isDark
                       ? "border-[#2b1328] bg-[#160918] text-white hover:border-[#d9487d]"
                       : "border-[#ebdce7] bg-white text-gray-800 hover:border-[#d9487d]"
@@ -100,7 +100,7 @@ export function LookbookSection({
           <div
             ref={railRef}
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory py-2"
+            className="flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory py-2 scroll-pl-4 sm:scroll-pl-6 lg:scroll-pl-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {lookbookList.map((item) => {
               const isSelected = selectedLookbook?.id === item.id;
@@ -108,7 +108,7 @@ export function LookbookSection({
                 <div
                   key={item.id}
                   className={cn(
-                    "group shrink-0 w-[250px] sm:w-[266px] snap-start rounded-2xl border overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl",
+                    "group shrink-0 w-[240px] sm:w-[266px] snap-start rounded-2xl border overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl",
                     isSelected
                       ? "border-[#d9487d] ring-2 ring-[#d9487d]/30"
                       : isDark

@@ -4,6 +4,7 @@ import type { LandingDate, TimeSlot } from "../types";
 import type { useBooking } from "../hooks/useBooking";
 import { BookingSuccess } from "./BookingSuccess";
 import { BookingSummary } from "./BookingSummary";
+import { BookingSchedule } from "./BookingSchedule";
 import { BookingForm } from "./BookingForm";
 
 interface BookingSectionProps {
@@ -35,23 +36,43 @@ export function BookingSection({ booking, availableDates, timeSlots }: BookingSe
           />
         ) : (
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-            <BookingSummary
-              selectedService={booking.selectedService} selectedLookbook={booking.selectedLookbook}
-              onClearLookbook={() => booking.setSelectedLookbook(null)} selectedAddons={booking.selectedAddons}
-              onToggleAddon={booking.toggleAddon} calculatedTotal={booking.calculatedTotal}
-              calculatedDuration={booking.calculatedDuration}
-            />
-            <BookingForm
-              availableDates={availableDates} selectedDate={booking.selectedDate}
-              onSelectDate={booking.setSelectedDate} timeSlots={timeSlots}
-              selectedTime={booking.selectedTime} onSelectTime={booking.setSelectedTime}
-              name={booking.name} onChangeName={booking.setName}
-              email={booking.email} onChangeEmail={booking.setEmail}
-              phone={booking.phone} onChangePhone={booking.setPhone}
-              notes={booking.notes} onChangeNotes={booking.setNotes}
-              calculatedTotal={booking.calculatedTotal} rateLimitError={booking.rateLimitError}
-              isSubmitting={booking.status === "submitting"} onSubmit={booking.handleSubmitBooking}
-            />
+            <div className="space-y-6">
+              <BookingSummary
+                selectedService={booking.selectedService}
+                selectedLookbook={booking.selectedLookbook}
+                onClearLookbook={() => booking.setSelectedLookbook(null)}
+                selectedAddons={booking.selectedAddons}
+                onToggleAddon={booking.toggleAddon}
+                calculatedTotal={booking.calculatedTotal}
+                calculatedDuration={booking.calculatedDuration}
+              />
+              <BookingSchedule
+                availableDates={availableDates}
+                selectedDate={booking.selectedDate}
+                onSelectDate={booking.setSelectedDate}
+                timeSlots={timeSlots}
+                selectedTime={booking.selectedTime}
+                onSelectTime={booking.setSelectedTime}
+              />
+            </div>
+            <div>
+              <BookingForm
+                name={booking.name}
+                onChangeName={booking.setName}
+                email={booking.email}
+                onChangeEmail={booking.setEmail}
+                phone={booking.phone}
+                onChangePhone={booking.setPhone}
+                notes={booking.notes}
+                onChangeNotes={booking.setNotes}
+                selectedDate={booking.selectedDate}
+                selectedTime={booking.selectedTime}
+                calculatedTotal={booking.calculatedTotal}
+                rateLimitError={booking.rateLimitError}
+                isSubmitting={booking.status === "submitting"}
+                onSubmit={booking.handleSubmitBooking}
+              />
+            </div>
           </div>
         )}
       </div>
